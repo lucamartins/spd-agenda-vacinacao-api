@@ -1,7 +1,9 @@
 package dev.lucamartins.spdagendavacinacao.service.usuario.dto;
 
 import dev.lucamartins.spdagendavacinacao.domain.usuario.Usuario;
+import dev.lucamartins.spdagendavacinacao.service.alergia.dto.AlergiaView;
 
+import java.util.List;
 import java.util.UUID;
 
 public record UsuarioView(
@@ -13,7 +15,8 @@ public record UsuarioView(
         String numero,
         String setor,
         String cidade,
-        String uf
+        String uf,
+        List<AlergiaView> alergias
 ) {
     public UsuarioView(Usuario usuario) {
         this(
@@ -25,7 +28,10 @@ public record UsuarioView(
                 usuario.getNumero(),
                 usuario.getSetor(),
                 usuario.getCidade(),
-                usuario.getUf()
+                usuario.getUf(),
+                usuario.getAlergias().stream()
+                        .map(AlergiaView::new)
+                        .toList()
         );
     }
 }

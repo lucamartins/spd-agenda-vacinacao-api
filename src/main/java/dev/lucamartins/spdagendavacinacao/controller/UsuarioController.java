@@ -2,6 +2,7 @@ package dev.lucamartins.spdagendavacinacao.controller;
 
 import dev.lucamartins.spdagendavacinacao.infra.protocol.ApiResponse;
 import dev.lucamartins.spdagendavacinacao.service.usuario.UsuarioService;
+import dev.lucamartins.spdagendavacinacao.service.usuario.dto.AddUsuarioAlergiaRequest;
 import dev.lucamartins.spdagendavacinacao.service.usuario.dto.AddUsuarioRequest;
 import dev.lucamartins.spdagendavacinacao.service.usuario.dto.UsuarioView;
 import jakarta.transaction.Transactional;
@@ -45,5 +46,14 @@ public class UsuarioController {
             @PathVariable UUID id
     ) {
         service.deleteUsuario(id);
+    }
+
+    @PostMapping("{id}/alergias")
+    @Transactional
+    public void addUsuarioAlergia(
+            @PathVariable UUID id,
+            @RequestBody @Valid AddUsuarioAlergiaRequest request
+            ) {
+        service.addUsuarioAlergia(id, request);
     }
 }

@@ -1,6 +1,7 @@
 package dev.lucamartins.spdagendavacinacao.domain.vacina;
 
 import dev.lucamartins.spdagendavacinacao.domain.agenda.Agenda;
+import dev.lucamartins.spdagendavacinacao.service.vacina.dto.AddVacinaRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,4 +36,16 @@ public class Vacina {
 
     @OneToMany(mappedBy = "vacina", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Agenda> agendas;
+
+    public Vacina(AddVacinaRequest addVacinaRequest) {
+        this.titulo = addVacinaRequest.titulo();
+        this.descricao = addVacinaRequest.descricao();
+        this.doses = addVacinaRequest.doses();
+        this.periodicidade = addVacinaRequest.periodicidade();
+        this.intervalo = addVacinaRequest.intervalo();
+    }
+
+    public boolean canBeDeleted() {
+        return agendas.isEmpty();
+    }
 }

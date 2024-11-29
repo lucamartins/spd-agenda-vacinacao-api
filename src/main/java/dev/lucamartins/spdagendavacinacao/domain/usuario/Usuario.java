@@ -1,5 +1,6 @@
 package dev.lucamartins.spdagendavacinacao.domain.usuario;
 
+import dev.lucamartins.spdagendavacinacao.domain.agenda.Agenda;
 import dev.lucamartins.spdagendavacinacao.domain.alergia.Alergia;
 import dev.lucamartins.spdagendavacinacao.service.usuario.dto.AddUsuarioRequest;
 import jakarta.persistence.*;
@@ -49,6 +50,9 @@ public class Usuario {
     )
     private List<Alergia> alergias;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Agenda> agendas;
+
     public Usuario(AddUsuarioRequest addUsuarioRequest) {
         this.nome = addUsuarioRequest.nome();
         this.dataNascimento = addUsuarioRequest.dataNascimento();
@@ -62,6 +66,6 @@ public class Usuario {
     }
 
     public boolean canBeDeleted() {
-        return true;
+        return this.agendas.isEmpty();
     }
 }

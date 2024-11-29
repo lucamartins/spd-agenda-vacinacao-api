@@ -1,6 +1,7 @@
 package dev.lucamartins.spdagendavacinacao.domain.usuario;
 
 import dev.lucamartins.spdagendavacinacao.domain.alergia.Alergia;
+import dev.lucamartins.spdagendavacinacao.service.usuario.dto.AddUsuarioRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -47,4 +48,20 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "alergia_id")
     )
     private List<Alergia> alergias;
+
+    public Usuario(AddUsuarioRequest addUsuarioRequest) {
+        this.nome = addUsuarioRequest.nome();
+        this.dataNascimento = addUsuarioRequest.dataNascimento();
+        this.sexo = addUsuarioRequest.sexo();
+        this.logradouro = addUsuarioRequest.logradouro();
+        this.numero = addUsuarioRequest.numero();
+        this.Setor = addUsuarioRequest.setor();
+        this.cidade = addUsuarioRequest.cidade();
+        this.uf = addUsuarioRequest.uf();
+        this.alergias = List.of();
+    }
+
+    public boolean canBeDeleted() {
+        return true;
+    }
 }

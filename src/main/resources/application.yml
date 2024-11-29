@@ -16,3 +16,6 @@ spring:
         format_sql: true
         jdbc:
         time_zone: UTC
+server:
+  error:
+    include-stacktrace: never

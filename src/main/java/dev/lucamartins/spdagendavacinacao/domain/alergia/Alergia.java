@@ -25,5 +25,5 @@ public class Alergia {
     private String nome;
 
     @ManyToMany(mappedBy = "alergias")
-    private List<Usuario> usuarios;
+    private List<Usuario> usuarios = List.of();
 }

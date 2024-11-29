@@ -31,4 +31,8 @@ public class Alergia {
     public Alergia(AddAlergiaRequest addAlergiaRequest) {
         this.nome = addAlergiaRequest.nome();
     }
+
+    public boolean canBeDeleted() {
+        return this.usuarios.isEmpty();
+    }
 }

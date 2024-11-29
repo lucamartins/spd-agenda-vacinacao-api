@@ -2,6 +2,7 @@ package dev.lucamartins.spdagendavacinacao.service.alergia;
 
 import dev.lucamartins.spdagendavacinacao.domain.alergia.Alergia;
 import dev.lucamartins.spdagendavacinacao.domain.alergia.AlergiaRepository;
+import dev.lucamartins.spdagendavacinacao.infra.exception.custom.BadRequestException;
 import dev.lucamartins.spdagendavacinacao.infra.exception.custom.NotFoundException;
 import dev.lucamartins.spdagendavacinacao.service.alergia.dto.AddAlergiaRequest;
 import dev.lucamartins.spdagendavacinacao.service.alergia.dto.AlergiaView;
@@ -35,6 +36,10 @@ public class AlergiaService {
         var alergia = alergiaRepository
                 .findById(id)
                 .orElseThrow(NotFoundException::new);
+
+        if (!alergia.canBeDeleted()) {
+            throw new BadRequestException("Alergia não pode ser deletada");
+        }
 
         alergiaRepository.delete(alergia);
     }

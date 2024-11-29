@@ -1,6 +1,7 @@
 package dev.lucamartins.spdagendavacinacao.domain.alergia;
 
 import dev.lucamartins.spdagendavacinacao.domain.usuario.Usuario;
+import dev.lucamartins.spdagendavacinacao.service.alergia.dto.AddAlergiaRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +26,9 @@ public class Alergia {
     private String nome;
 
     @ManyToMany(mappedBy = "alergias")
-    private List<Usuario> usuarios = List.of();
+    private List<Usuario> usuarios;
+
+    public Alergia(AddAlergiaRequest addAlergiaRequest) {
+        this.nome = addAlergiaRequest.nome();
+    }
 }

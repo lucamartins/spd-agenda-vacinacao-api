@@ -2,6 +2,7 @@ package dev.lucamartins.spdagendavacinacao.domain.agenda;
 
 import dev.lucamartins.spdagendavacinacao.domain.usuario.Usuario;
 import dev.lucamartins.spdagendavacinacao.domain.vacina.Vacina;
+import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AddAgendaRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class Agenda {
     @Enumerated(EnumType.STRING)
     private SituacaoAgenda situacao;
 
+    @Column(nullable = true)
     private OffsetDateTime dataSituacao;
 
     private String observacoes;
@@ -37,4 +39,17 @@ public class Agenda {
 
     @ManyToOne
     private Usuario usuario;
+
+    public Agenda(AddAgendaRequest addAgendaRequest, Vacina vacina, Usuario usuario, OffsetDateTime data) {
+        this.data = data;
+        this.observacoes = addAgendaRequest.observacoes();
+        this.vacina = vacina;
+        this.usuario = usuario;
+        this.situacao = SituacaoAgenda.SCHEDULED;
+        this.dataSituacao = null;
+    }
+
+    public boolean canBeDeleted() {
+        return false;
+    }
 }

@@ -19,6 +19,16 @@ public class VacinaService {
     private final VacinaRepository vacinaRepository;
 
     public void addVacina(AddVacinaRequest addVacinaRequest) {
+        if (addVacinaRequest.doses() == 1) {
+            if (addVacinaRequest.intervalo() != null || addVacinaRequest.periodicidade() != null) {
+                throw new BadRequestException("Vacina com dose única não deve ter definição de intervalo ou periodicidade");
+            }
+        } else {
+            if (addVacinaRequest.intervalo() == null || addVacinaRequest.periodicidade() == null) {
+                throw new BadRequestException("Vacina com mais de uma dose deve ter definição de intervalo e periodicidade");
+            }
+        }
+
         var newVacina = new Vacina(
                 addVacinaRequest
         );

@@ -3,6 +3,7 @@ package dev.lucamartins.spdagendavacinacao.domain.agenda;
 import dev.lucamartins.spdagendavacinacao.domain.usuario.Usuario;
 import dev.lucamartins.spdagendavacinacao.domain.vacina.Vacina;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AddAgendaRequest;
+import dev.lucamartins.spdagendavacinacao.service.agenda.dto.BaixaAgendaRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -51,5 +52,14 @@ public class Agenda {
 
     public boolean canBeDeleted() {
         return false;
+    }
+
+    public boolean canBeBaixada() {
+        return situacao == SituacaoAgenda.SCHEDULED;
+    }
+
+    public void baixar(BaixaAgendaRequest request) {
+        this.situacao = request.situacao();
+        this.dataSituacao = OffsetDateTime.now();
     }
 }

@@ -4,6 +4,7 @@ import dev.lucamartins.spdagendavacinacao.infra.protocol.ApiResponse;
 import dev.lucamartins.spdagendavacinacao.service.agenda.AgendaService;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AddAgendaRequest;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AgendaView;
+import dev.lucamartins.spdagendavacinacao.service.agenda.dto.BaixaAgendaRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -47,5 +48,14 @@ public class AgendaController {
             @PathVariable UUID id
     ) {
         service.deleteAgenda(id);
+    }
+
+    @PostMapping("{id}/baixa")
+    @Transactional
+    public void baixaAgenda(
+            @PathVariable UUID id,
+            @RequestBody @Valid BaixaAgendaRequest request
+            ) {
+        service.baixaAgenda(id, request);
     }
 }

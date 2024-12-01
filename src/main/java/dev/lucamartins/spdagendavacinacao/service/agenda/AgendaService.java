@@ -2,6 +2,7 @@ package dev.lucamartins.spdagendavacinacao.service.agenda;
 
 import dev.lucamartins.spdagendavacinacao.domain.agenda.Agenda;
 import dev.lucamartins.spdagendavacinacao.domain.agenda.AgendaRepository;
+import dev.lucamartins.spdagendavacinacao.domain.agenda.SituacaoAgenda;
 import dev.lucamartins.spdagendavacinacao.domain.usuario.UsuarioRepository;
 import dev.lucamartins.spdagendavacinacao.domain.vacina.PeriodicidadeIntervaloDose;
 import dev.lucamartins.spdagendavacinacao.domain.vacina.Vacina;
@@ -10,6 +11,7 @@ import dev.lucamartins.spdagendavacinacao.infra.exception.custom.BadRequestExcep
 import dev.lucamartins.spdagendavacinacao.infra.exception.custom.NotFoundException;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AddAgendaRequest;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AgendaView;
+import dev.lucamartins.spdagendavacinacao.service.agenda.dto.BaixaAgendaRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -70,5 +72,22 @@ public class AgendaService {
         }
 
         agendaRepository.delete(agenda);
+    }
+
+    public void baixaAgenda(UUID id, BaixaAgendaRequest request) {
+        var agenda = agendaRepository
+                .findById(id)
+                .orElseThrow(() -> new NotFoundException("Agenda não encontrada"));
+
+        if (!agenda.canBeBaixada()) {
+            throw new BadRequestException("Não pode ser feito baixa na agenda");
+        }
+
+        if (!List.of(SituacaoAgenda.DONE, SituacaoAgenda.CANCELED).contains(request.situacao())) {
+            throw new BadRequestException("Situação inválida");
+        }
+
+        agenda.baixar(request);
+        agendaRepository.save(agenda);
     }
 }

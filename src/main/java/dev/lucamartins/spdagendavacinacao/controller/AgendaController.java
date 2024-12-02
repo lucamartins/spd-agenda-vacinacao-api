@@ -1,5 +1,6 @@
 package dev.lucamartins.spdagendavacinacao.controller;
 
+import dev.lucamartins.spdagendavacinacao.domain.agenda.SituacaoAgenda;
 import dev.lucamartins.spdagendavacinacao.infra.protocol.ApiResponse;
 import dev.lucamartins.spdagendavacinacao.service.agenda.AgendaService;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AddAgendaRequest;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,8 +33,18 @@ public class AgendaController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<AgendaView>>> getAgendas () {
-        var agendas = service.getAgendas();
+    public ResponseEntity<ApiResponse<List<AgendaView>>> getAgendas(
+            @RequestParam(required = false) SituacaoAgenda situacao,
+            @RequestParam(required = false) OffsetDateTime dataStart,
+            @RequestParam(required = false) OffsetDateTime dataEnd,
+            @RequestParam(required = false) UUID usuarioId
+    ) {
+        var agendas = service.getAgendas(
+                situacao,
+                dataStart,
+                dataEnd,
+                usuarioId
+        );
 
         var response = new ApiResponse<>(
                 HttpStatus.OK.value(),
@@ -55,7 +67,7 @@ public class AgendaController {
     public void baixaAgenda(
             @PathVariable UUID id,
             @RequestBody @Valid BaixaAgendaRequest request
-            ) {
+    ) {
         service.baixaAgenda(id, request);
     }
 }

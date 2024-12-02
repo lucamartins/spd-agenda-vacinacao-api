@@ -58,8 +58,15 @@ public class AgendaService {
         }
     }
 
-    public List<AgendaView> getAgendas() {
-        return agendaRepository.findAll().stream().map(AgendaView::new).toList();
+    public List<AgendaView> getAgendas(
+            SituacaoAgenda situacao,
+            OffsetDateTime dataStart,
+            OffsetDateTime dataEnd,
+            UUID usuarioId
+    ) {
+        return agendaRepository
+                .findAgendasByFilters(situacao, dataStart, dataEnd, usuarioId)
+                .stream().map(AgendaView::new).toList();
     }
 
     public void deleteAgenda(UUID id) {

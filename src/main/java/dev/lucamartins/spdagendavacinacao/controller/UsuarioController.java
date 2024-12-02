@@ -56,4 +56,13 @@ public class UsuarioController {
             ) {
         service.addUsuarioAlergia(id, request);
     }
+
+    @DeleteMapping("{usuarioId}/alergias/{alergiaId}")
+    @Transactional
+    public void addUsuarioAlergia(
+            @PathVariable UUID usuarioId,
+            @PathVariable UUID alergiaId
+    ) {
+        service.removeUsuarioAlergia(usuarioId, alergiaId);
+    }
 }

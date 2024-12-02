@@ -85,4 +85,20 @@ public class UsuarioService {
 
         usuarioRepository.save(usuario);
     }
+
+    public void removeUsuarioAlergia(UUID usuarioId, UUID alergiaId) {
+        var usuario = usuarioRepository
+                .findById(usuarioId)
+                .orElseThrow(NotFoundException::new);
+
+
+        var alergia = usuario.getAlergias().stream()
+                .filter(a -> a.getId().equals(alergiaId))
+                .findFirst()
+                .orElseThrow(NotFoundException::new);
+
+        usuario.getAlergias().remove(alergia);
+
+        usuarioRepository.save(usuario);
+    }
 }

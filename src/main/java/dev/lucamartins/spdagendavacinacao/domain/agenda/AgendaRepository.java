@@ -12,7 +12,7 @@ public interface AgendaRepository extends JpaRepository<Agenda, UUID> {
     @Query("SELECT a FROM Agenda a WHERE "
             + "(COALESCE(:situacao, NULL) IS NULL OR a.situacao = :situacao) AND "
             + "(COALESCE(:dataStart, NULL) IS NULL OR a.data >= :dataStart) AND "
-            + "(COALESCE(:dataEnØd, NULL) IS NULL OR a.data <= :dataEnd) AND "
+            + "(COALESCE(:dataEnd, NULL) IS NULL OR a.data <= :dataEnd) AND "
             + "(COALESCE(:usuarioId, NULL) IS NULL OR a.usuario.id = :usuarioId)")
     List<Agenda> findAgendasByFilters(
             @Param("situacao") SituacaoAgenda situacao,

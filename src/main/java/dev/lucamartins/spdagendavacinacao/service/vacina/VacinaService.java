@@ -48,7 +48,7 @@ public class VacinaService {
                 .orElseThrow(NotFoundException::new);
 
         if (!vacina.canBeDeleted()) {
-            throw new BadRequestException("Vacina não pode ser deletada");
+            throw new BadRequestException("Vacina já possui associação e não pode ser mais excluída");
         }
 
         vacinaRepository.delete(vacina);

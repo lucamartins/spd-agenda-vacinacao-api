@@ -38,16 +38,25 @@ public class Agenda {
     @ManyToOne
     private Vacina vacina;
 
+    private Integer doseIdx;
+
     @ManyToOne
     private Usuario usuario;
 
-    public Agenda(AddAgendaRequest addAgendaRequest, Vacina vacina, Usuario usuario, OffsetDateTime data) {
+    public Agenda(
+            AddAgendaRequest addAgendaRequest,
+            Vacina vacina,
+            Usuario usuario,
+            OffsetDateTime data,
+            Integer doseIdx
+    ) {
         this.data = data;
         this.observacoes = addAgendaRequest.observacoes();
         this.vacina = vacina;
         this.usuario = usuario;
         this.situacao = SituacaoAgenda.SCHEDULED;
         this.dataSituacao = null;
+        this.doseIdx = doseIdx;
     }
 
     public boolean canBeDeleted() {

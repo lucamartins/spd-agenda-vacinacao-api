@@ -52,7 +52,7 @@ public class AgendaService {
         OffsetDateTime lastScheduledDate = null;
         for (int i = 0; i < vacina.getDoses(); i++) {
             OffsetDateTime data = i == 0 ? addAgendaRequest.data() : calculateNextDoseDate(vacina, lastScheduledDate);
-            var agenda = new Agenda(addAgendaRequest, vacina, usuario, data);
+            var agenda = new Agenda(addAgendaRequest, vacina, usuario, data, i);
             agendaRepository.save(agenda);
             lastScheduledDate = data;
         }

@@ -2,9 +2,9 @@ spring:
   application:
     name: spd-agenda-vacinacao
   datasource:
-    url: jdbc:postgresql://localhost:5432/main
-    username: myuser
-    password: mysecretpassword
+    url: jdbc:postgresql://localhost:5432/vacinacao
+    username: user
+    password: password
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

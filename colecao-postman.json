@@ -84,7 +84,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"alergias\": [\"656f03e6-41ad-4a78-bdb0-995c97d7929a\", \"656f03e6-41ad-4a78-bdb0-995c97d7929b\"]\n}",
+							"raw": "{\n    \"alergias\": [\"69cb23f4-986e-4dde-95be-47139196afd5\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,7 +104,7 @@
 							"variable": [
 								{
 									"key": "usuarioId",
-									"value": "8878b393-1a2c-4e88-bfdf-61fca3fd2402"
+									"value": "7a907253-3b9c-4292-99eb-5a20638182e4"
 								}
 							]
 						}
@@ -229,7 +229,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titulo\": \"Kac-Lez\",\n    \"descricao\": \"Vacina para Cabeção\",\n    \"doses\": 1,\n    \"periodicidade\": null, // DIAS, SEMANAS, MESES, ANOS\n    \"intervalo\": null\n}",
+							"raw": "{\n    \"titulo\": \"Sars-Cov-02\",\n    \"descricao\": \"Vacina para COVID-19\",\n    \"doses\": 1,\n    \"periodicidade\": null, // DIAS, SEMANAS, MESES, ANOS\n    \"intervalo\": null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -282,7 +282,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "239664f0-f4af-4fcb-8c12-c47de0a9b61f"
+									"value": "aae5bdd6-4eec-4107-a698-5ab8d44e86b1"
 								}
 							]
 						}
@@ -301,7 +301,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"data\": \"2024-12-14T16:15:00Z\",\n    \"observacoes\": null,\n    \"vacinaId\": \"c0e220e1-128d-46d0-998e-6a0e7c873305\",\n    \"usuarioId\": \"8878b393-1a2c-4e88-bfdf-61fca3fd2402\"\n}",
+							"raw": "{\n    \"data\": \"2024-12-14T16:15:00Z\",\n    \"observacoes\": null,\n    \"vacinaId\": \"aae5bdd6-4eec-4107-a698-5ab8d44e86b1\",\n    \"usuarioId\": \"7a907253-3b9c-4292-99eb-5a20638182e4\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -336,7 +336,23 @@
 							"query": [
 								{
 									"key": "situacao",
-									"value": "DONE",
+									"value": "CANCELED",
+									"description": "DONE, SCHEDULED, CANCELED",
+									"disabled": true
+								},
+								{
+									"key": "dataStart",
+									"value": "2024-12-10T16:15:00Z",
+									"disabled": true
+								},
+								{
+									"key": "dataEnd",
+									"value": "2024-12-11T16:15:00Z",
+									"disabled": true
+								},
+								{
+									"key": "usuarioId",
+									"value": "8878b393-1a2c-4e88-bfdf-61fca3fd2402",
 									"disabled": true
 								}
 							]
@@ -391,6 +407,31 @@
 								"agendas",
 								":id",
 								"baixa"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "32285494-ffff-441d-a414-c5c86aafebb9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agenda - confirmar presenca",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/agendas/:id/confirmar-presenca",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"agendas",
+								":id",
+								"confirmar-presenca"
 							],
 							"variable": [
 								{

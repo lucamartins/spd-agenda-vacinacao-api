@@ -35,10 +35,12 @@ public class Agenda {
 
     private String observacoes;
 
+    private Integer doseIdx;
+
+    private Boolean attendanceConfirmed;
+
     @ManyToOne
     private Vacina vacina;
-
-    private Integer doseIdx;
 
     @ManyToOne
     private Usuario usuario;
@@ -70,5 +72,19 @@ public class Agenda {
     public void baixar(BaixaAgendaRequest request) {
         this.situacao = request.situacao();
         this.dataSituacao = OffsetDateTime.now();
+    }
+
+    public boolean canConfirmAttendance() {
+        boolean isScheduled = situacao == SituacaoAgenda.SCHEDULED;
+
+        boolean isBeforeSchedulingTime = OffsetDateTime.now().isBefore(data);
+
+        boolean isInConfirmationWindow = OffsetDateTime.now().isAfter(data.minusDays(3));
+
+        return isScheduled && isBeforeSchedulingTime && isInConfirmationWindow;
+    }
+
+    public boolean canReschedule() {
+        return situacao == SituacaoAgenda.SCHEDULED;
     }
 }

@@ -12,6 +12,7 @@ import dev.lucamartins.spdagendavacinacao.infra.exception.custom.NotFoundExcepti
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AddAgendaRequest;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AgendaView;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.BaixaAgendaRequest;
+import dev.lucamartins.spdagendavacinacao.service.agenda.dto.RescheduleAgendaRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -75,7 +76,7 @@ public class AgendaService {
                 .orElseThrow(() -> new NotFoundException("Agenda não encontrada"));
 
         if (!agenda.canBeDeleted()) {
-            throw new BadRequestException("Agenda não pode ser deletada");
+            throw new BadRequestException("Agenda não pode ser excluída");
         }
 
         agendaRepository.delete(agenda);
@@ -87,7 +88,7 @@ public class AgendaService {
                 .orElseThrow(() -> new NotFoundException("Agenda não encontrada"));
 
         if (!agenda.canBeBaixada()) {
-            throw new BadRequestException("Não pode ser feito baixa na agenda");
+            throw new BadRequestException("Baixa só é permitido se em situação de agendada");
         }
 
         if (!List.of(SituacaoAgenda.DONE, SituacaoAgenda.CANCELED).contains(request.situacao())) {
@@ -95,6 +96,35 @@ public class AgendaService {
         }
 
         agenda.baixar(request);
+        agendaRepository.save(agenda);
+    }
+
+    public void confirmAttendance(UUID id) {
+        var agenda = agendaRepository
+                .findById(id)
+                .orElseThrow(() -> new NotFoundException("Agenda não encontrada"));
+
+        if (agenda.canConfirmAttendance()) {
+            throw new BadRequestException(
+                    "Agenda só pode ser confirmada se ainda estiver " +
+                    "agendada e dentro do prazo de confirmação (3 dias)"
+            );
+        }
+
+        agenda.setAttendanceConfirmed(true);
+        agendaRepository.save(agenda);
+    }
+
+    public void rescheduleAgenda(UUID id, RescheduleAgendaRequest request) {
+        var agenda = agendaRepository
+                .findById(id)
+                .orElseThrow(() -> new NotFoundException("Agenda não encontrada"));
+
+        if (!agenda.canReschedule()) {
+            throw new BadRequestException("Agenda só pode ser reagendada se estiver atualmente agendada");
+        }
+
+        agenda.setData(request.data());
         agendaRepository.save(agenda);
     }
 }

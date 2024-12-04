@@ -38,7 +38,7 @@ public class AlergiaService {
                 .orElseThrow(NotFoundException::new);
 
         if (!alergia.canBeDeleted()) {
-            throw new BadRequestException("Alergia não pode ser deletada");
+            throw new BadRequestException("Alergia só pode ser excluída se não estiver associada a nenhum usuário");
         }
 
         alergiaRepository.delete(alergia);

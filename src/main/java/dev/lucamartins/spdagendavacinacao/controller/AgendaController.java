@@ -6,6 +6,7 @@ import dev.lucamartins.spdagendavacinacao.service.agenda.AgendaService;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AddAgendaRequest;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.AgendaView;
 import dev.lucamartins.spdagendavacinacao.service.agenda.dto.BaixaAgendaRequest;
+import dev.lucamartins.spdagendavacinacao.service.agenda.dto.RescheduleAgendaRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -69,5 +70,22 @@ public class AgendaController {
             @RequestBody @Valid BaixaAgendaRequest request
     ) {
         service.baixaAgenda(id, request);
+    }
+
+    @PostMapping("{id}/confirmar-presenca")
+    @Transactional
+    public void confirmarPresenca(
+            @PathVariable UUID id
+    ) {
+        service.confirmAttendance(id);
+    }
+
+    @PostMapping("{id}/reagendar")
+    @Transactional
+    public void reagendar(
+            @PathVariable UUID id,
+            @RequestBody @Valid RescheduleAgendaRequest request
+    ) {
+        service.rescheduleAgenda(id, request);
     }
 }

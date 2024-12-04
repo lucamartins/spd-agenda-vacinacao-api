@@ -40,7 +40,7 @@ public class UsuarioService {
                 .orElseThrow(NotFoundException::new);
 
         if (!usuario.canBeDeleted()) {
-            throw new BadRequestException("Usuário não pode ser deletado");
+            throw new BadRequestException("Usuário só pode ser excluído se não houverem registros de agendas");
         }
 
         usuarioRepository.delete(usuario);

@@ -1,0 +1,437 @@
+{
+	"info": {
+		"_postman_id": "fb022924-f8eb-4bb7-9507-b9426bf4b5f7",
+		"name": "SPD - Agenda Vacinacao",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25441357",
+		"_collection_link": "https://gmp-project.postman.co/workspace/GMS~159b142f-5011-4883-926a-fb28081d6f83/collection/25441357-fb022924-f8eb-4bb7-9507-b9426bf4b5f7?action=share&source=collection_link&creator=25441357"
+	},
+	"item": [
+		{
+			"name": "usuarios",
+			"item": [
+				{
+					"name": "add usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Luca Santos Martins\",\n    \"dataNascimento\": \"2001-10-12\",\n    \"sexo\": \"MASCULINO\",\n    \"logradouro\": \"Rua A-100\",\n    \"numero\": \"344\",\n    \"setor\": \"Aurora\",\n    \"cidade\": \"Goiânia\",\n    \"uf\": \"go\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/usuarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/usuarios/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "cfe35328-0e81-4b66-9ab8-60df9f29889f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add usuario alergia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"alergias\": [\"656f03e6-41ad-4a78-bdb0-995c97d7929a\", \"656f03e6-41ad-4a78-bdb0-995c97d7929b\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/usuarios/:usuarioId/alergias",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios",
+								":usuarioId",
+								"alergias"
+							],
+							"variable": [
+								{
+									"key": "usuarioId",
+									"value": "8878b393-1a2c-4e88-bfdf-61fca3fd2402"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove usuario alergia",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"alergias\": [\"656f03e6-41ad-4a78-bdb0-995c97d7929a\", \"656f03e6-41ad-4a78-bdb0-995c97d7929b\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/usuarios/:usuarioId/alergias",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios",
+								":usuarioId",
+								"alergias"
+							],
+							"variable": [
+								{
+									"key": "usuarioId",
+									"value": "8878b393-1a2c-4e88-bfdf-61fca3fd2402"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "alergias",
+			"item": [
+				{
+					"name": "add alergia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Algodão\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/alergias",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"alergias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get alergias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/alergias",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"alergias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete alergia",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/alergias/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"alergias",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3c10bf0b-7f83-41fe-a2f1-7555ac6e9627"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "vacinas",
+			"item": [
+				{
+					"name": "add vacina",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Kac-Lez\",\n    \"descricao\": \"Vacina para Cabeção\",\n    \"doses\": 1,\n    \"periodicidade\": null, // DIAS, SEMANAS, MESES, ANOS\n    \"intervalo\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/vacinas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vacinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get vacinas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vacinas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vacinas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete vacina",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vacinas/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vacinas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "239664f0-f4af-4fcb-8c12-c47de0a9b61f"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "agendas",
+			"item": [
+				{
+					"name": "add agenda",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data\": \"2024-12-14T16:15:00Z\",\n    \"observacoes\": null,\n    \"vacinaId\": \"c0e220e1-128d-46d0-998e-6a0e7c873305\",\n    \"usuarioId\": \"8878b393-1a2c-4e88-bfdf-61fca3fd2402\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/agendas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"agendas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get agendas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/agendas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"agendas"
+							],
+							"query": [
+								{
+									"key": "situacao",
+									"value": "DONE",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete agenda",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/agendas/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"agendas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "239664f0-f4af-4fcb-8c12-c47de0a9b61f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "agenda - dar baixa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"situacao\": \"DONE\" // CANCELED, DONE\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/agendas/:id/baixa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"agendas",
+								":id",
+								"baixa"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "32285494-ffff-441d-a414-c5c86aafebb9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
